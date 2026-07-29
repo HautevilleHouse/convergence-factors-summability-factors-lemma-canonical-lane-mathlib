@@ -1,0 +1,25 @@
+import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean.ConvergenceFactors
+import HautevilleHouse.ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean.SummabilityFactors
+import HautevilleHouse.ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean.TauberianTheorem
+
+namespace HautevilleHouse
+namespace ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean
+
+structure AdmissibleAnalysisObject where
+  convergenceFactors : ConvergenceFactors
+  summabilityFactors : SummabilityFactors convergenceFactors
+  tauberianTheorem : TauberianTheorem convergenceFactors summabilityFactors
+  convergenceProof : ConvergenceFactorsClosed convergenceFactors
+  summabilityProof : SummabilityFactorsClosed summabilityFactors
+  tauberianProof : TauberianTheoremClosed tauberianTheorem
+
+def AdmissibleAnalysisClosure (O : AdmissibleAnalysisObject) : Prop :=
+  ConvergenceFactorsClosed O.convergenceFactors ∧ SummabilityFactorsClosed O.summabilityFactors ∧ TauberianTheoremClosed O.tauberianTheorem
+
+theorem admissible_analysis_closure_from_object (O : AdmissibleAnalysisObject) :
+    AdmissibleAnalysisClosure O :=
+  And.intro O.convergenceProof (And.intro O.summabilityProof O.tauberianProof)
+
+end ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean
+end HautevilleHouse

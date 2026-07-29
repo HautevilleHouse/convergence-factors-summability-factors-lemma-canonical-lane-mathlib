@@ -1,0 +1,16 @@
+import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean.ConvergenceFactors
+import HautevilleHouse.ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean.SummabilityFactors
+import HautevilleHouse.ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean.TauberianTheorem
+
+namespace HautevilleHouse
+namespace ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean
+
+def bridgeClosed (A : AdmissibleClass) : Prop :=
+  ConvergenceFactorsClosed A.object.convergenceFactors ∧ SummabilityFactorsClosed A.object.summabilityFactors ∧ TauberianTheoremClosed A.object.tauberianTheorem
+
+theorem bridge_from_admissible_class (A : AdmissibleClass) : bridgeClosed A :=
+  And.intro A.object.convergenceProof (And.intro A.object.summabilityProof A.object.tauberianProof)
+
+end ConvergenceFactorsSummabilityFactorsLemmaCanonicalLaneLean
+end HautevilleHouse
